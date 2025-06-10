@@ -3,11 +3,11 @@ import streamlit as st
 
 st.title("Welcome to world of AI")
 # Load chatbot model
-chatbot = pipeline("text-generation", model="EleutherAI/gpt-neo-125M")
+chatbot = pipeline("text-generation", model="gpt2")
 
 while True:
     #prompt = input("You: ")
-    prompt = st.text_input("Enter your message...", key="ssss")
+    prompt = st.text_input("Enter your message...")
     if prompt.lower() == "exit":
         break
     if st.button("Enter") and prompt:
