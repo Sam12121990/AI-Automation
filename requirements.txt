@@ -3,3 +3,6 @@ pandas
 matplotlib
 plotly
 numpy
+transformers
+transformers torch
+transformers tensorflow
