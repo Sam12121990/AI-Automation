@@ -1,16 +1,44 @@
-# This is a sample Python script.
+import streamlit as st
+from views.login import login
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# ✅ Initialize session state keys if not already set
 
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+if not st.session_state.authenticated:
+    login()
+    st.stop()
 
+# ---- PAGE SETUP ------
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+qlik_script_assessment = st.Page(
+    page="views/script_assessment.py",
+    title="Qlik Script Assessment",
+    icon=":material/monitoring:",
+    default=True,
+)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+qlik_script_flow_analyzer = st.Page(
+    page="views/script_flow_analyzer.py",
+    title="Qlik Script Flow Analyzer",
+    icon=":material/bar_chart:",
+)
+
+horizontal_timeline_chart = st.Page(
+    page="views/horizontal_timeline_chart.py",
+    title="Horizontal Timeline Chart",
+    icon=":material/download:",
+)
+
+logout = st.Page(
+    page="views/logout.py",
+    title="Logout",
+    icon=":material/logout:",
+)
+
+# --- NAVIGATION SETUP ---
+pg = st.navigation(pages=[qlik_script_assessment, qlik_script_flow_analyzer, horizontal_timeline_chart, logout])
+
+# --- RUN NAVIGATION ---
+pg.run()
